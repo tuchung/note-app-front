@@ -1,20 +1,24 @@
 <template>
-<div class="top-bar" id="example-menu">
-  <div class="top-bar-left">
-    <ul class="dropdown menu menu-hover-lines" data-dropdown-menu>
-      <li class="menu-text">NoteScape</li>
-      <li><a href="#">Dashboard</a></li>
-      <li><a href="#">List</a></li>
-      <li><a href="#">Map</a></li>
-    </ul>
+  <div>
+    <sui-menu pointing secondary>
+      <a
+        is="sui-menu-item"
+        v-for="item in items"
+        :active="isActive(item)"
+        :key="item"
+        :content="item"
+        @click="select(item)"
+      />
+      <sui-menu-menu position="right">
+        <a
+          is="sui-menu-item"
+          :active="isActive('Logout')"
+          content="Logout"
+          @click="select('Logout')"
+        />
+      </sui-menu-menu>
+    </sui-menu>
   </div>
-  <div class="top-bar-right">
-    <ul class="menu">
-      <li><input type="search" placeholder="Search"></li>
-      <li><button type="button" class="button">Search</button></li>
-    </ul>
-  </div>
-</div>
 </template>
 
 <script>
@@ -22,7 +26,16 @@ export default {
   name: 'Navigation',
   data () {
     return {
-      msg: 'Welcome to Your Vue.js App'
+      active: 'DashBoard',
+      items: ['Dashboard', 'Map', 'Calendar']
+    }
+  },
+  methods: {
+    isActive (name) {
+      return this.active === name
+    },
+    select (name) {
+      this.active = name
     }
   }
 }
