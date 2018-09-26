@@ -12,16 +12,24 @@
       <sui-menu-menu position="right">
         <a
           is="sui-menu-item"
+          :active="isActive('Login')"
+          content="Login"
+          @click="select('Login')"
+        />
+        <a
+          is="sui-menu-item"
           :active="isActive('Logout')"
           content="Logout"
           @click="select('Logout')"
         />
       </sui-menu-menu>
     </sui-menu>
+    <LoginModal />
   </div>
 </template>
 
 <script>
+import LoginModal from './login/LoginModal'
 export default {
   name: 'Navigation',
   data () {
@@ -37,6 +45,9 @@ export default {
     select (name) {
       this.active = name
     }
+  },
+  components: {
+    LoginModal
   }
 }
 </script>
